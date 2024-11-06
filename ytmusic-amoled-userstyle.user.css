@@ -1,0 +1,96 @@
+/* ==UserStyle==
+@name         YouTube Music AMOLED Theme
+@description  Some customizations I did to make YouTube Music better for me.
+@namespace    https://github.com/indierodo
+@author       indierodo
+@version      0.1.0
+@homepageURL  https://github.com/indierodo/ytmusic-amoled-userstyle
+@supportURL   https://github.com/indierodo/ytmusic-amoled-userstyle/issues
+@updateURL    https://github.com/indierodo/ytmusic-amoled-userstyle/ytmusic-amoled-userstyle.user.css
+@license      CC0-1.0
+@var          range carousel-items-width  "Carousel items width" [150, 10, 800, 10, "px"]
+@var          checkbox track-counter "Add track counter"  1
+==/UserStyle== */
+
+@-moz-document domain("music.youtube.com") {
+    /* AMOLED theme */
+    :root {
+        --bg-color: #000;
+        --ytmusic-brand-background-solid: var(--bg-color);
+        --ytmusic-player-bar-background: transparent;
+        --ytmusic-general-background-a: var(--bg-color);
+        --ytmusic-general-background-b: var(--bg-color);
+        --ytmusic-general-background-c: var(--bg-color);
+        --bytm-themed-bg: var(--bg-color);
+        --carousel-items-width: carousel-items-width;
+    }
+
+    ytmusic-app[is-bauhaus-sidenav-enabled] #guide-wrapper.ytmusic-app {
+        border-right: 0;
+    }
+
+    #background {
+        display: none!important;
+    }
+
+    ytmusic-player-bar {
+    background: rgb(1,1,1);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(1,1,1,1) 15%, rgba(1,1,1,1) 45%, rgba(0,0,0,1) 100%);
+    }
+
+    .background-gradient {
+        background: unset!important;
+    }
+
+    #contents, body, html {
+        background: var(--ytmusic-general-background-c)!important;
+    }
+
+
+    html {
+        scrollbar-color: var(--yt-spec-text-secondary) var(--ytmusic-general-background-c);
+    }
+
+    html > * {
+        scrollbar-color: var(--yt-spec-text-secondary) transparent;
+    }
+}
+@-moz-document domain("music.youtube.com") {
+    /* Carousel items width */
+    
+    .ytmusic-carousel #items [item-size="COLLECTION_STYLE_ITEM_SIZE_MEDIUM"]{
+        width: var(--carousel-items-width)!important;
+    }
+
+    .ytmusic-carousel-shelf-basic-header-renderer .title {
+        font-size: 2em!important;
+    }
+
+    .ytmusic-carousel-shelf-basic-header-renderer .strapline {
+        font-size: 0.9em!important;
+    }
+
+    #player {
+        margin: 100px 150px!important;
+    }
+}
+@-moz-document domain("music.youtube.com") {
+    /* Track counter */
+    
+    if track-counter {
+        ytmusic-player-queue, #contents {
+          counter-reset: section;
+        }
+
+        ytmusic-playlist-shelf-renderer ytmusic-responsive-list-item-renderer::before, ytmusic-player-queue-item::before {
+          counter-increment: section;
+          content: counter(section);
+          font-size: var(--ytd-caption-font-size);
+          font-weight: normal;
+          text-align: right;
+          color: #5c5c5c;
+          min-width: 22px;
+          margin-right: 20px;
+        }
+    }
+}
