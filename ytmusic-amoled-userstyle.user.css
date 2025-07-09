@@ -9,6 +9,7 @@
 @updateURL    https://github.com/indierodo/ytmusic-amoled-userstyle/ytmusic-amoled-userstyle.user.css
 @license      CC0-1.0
 @var          range carousel-items-width  "Carousel items width" [150, 10, 800, 10, "px"]
+@var          checkbox track-counter "Add track counter"  0
 ==/UserStyle== */
 
 @-moz-document domain("music.youtube.com") {
@@ -71,5 +72,25 @@
 
     #player {
         margin: 100px 150px!important;
+    }
+}
+@-moz-document domain("music.youtube.com") {
+    /* Track counter */
+    
+    if track-counter {
+        ytmusic-player-queue, #contents {
+          counter-reset: section;
+        }
+
+        ytmusic-playlist-shelf-renderer ytmusic-responsive-list-item-renderer::before, ytmusic-player-queue-item::before {
+          counter-increment: section;
+          content: counter(section);
+          font-size: var(--ytd-caption-font-size);
+          font-weight: normal;
+          text-align: right;
+          color: #5c5c5c;
+          min-width: 22px;
+          margin-right: 20px;
+        }
     }
 }
