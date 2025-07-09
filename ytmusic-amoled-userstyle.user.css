@@ -6,10 +6,16 @@
 @version      0.1.0
 @homepageURL  https://github.com/indierodo/ytmusic-amoled-userstyle
 @supportURL   https://github.com/indierodo/ytmusic-amoled-userstyle/issues
-@updateURL    https://github.com/indierodo/ytmusic-amoled-userstyle/ytmusic-amoled-userstyle.user.css
 @license      CC0-1.0
-@var          range carousel-items-width  "Carousel items width" [150, 10, 800, 10, "px"]
-@var          checkbox track-counter "Add track counter"  0
+@var          range carousel-items-width  "Carousel art width" [150, 10, 800, 1, "px"]
+@var          range title-size  "Title font size" [2.7, 0, 72, 0.1, "em"]
+@var          range strapline-size  "Strapline font size" [1.4, 0, 72, 0.1, "em"]
+@var          range coverart-margin-x  "Player's art horizontal margin" [100, 0, 1000, 1, "px"]
+@var          range coverart-margin-y  "Player's art vertical margin" [150, 0, 1000, 1, "px"]
+@var          range slider-hue  "Slider hue" [0, 0, 360, 1, "deg"]
+@var          range slider-saturation  "Slider saturation" [100, 0, 100, 1, "%"]
+@var          range slider-brightness  "Slider brightness" [100, 0, 100, 1, "%"]
+@var          checkbox track-counter "Add track counter to playlists"  0
 ==/UserStyle== */
 
 @-moz-document domain("music.youtube.com") {
@@ -22,7 +28,6 @@
         --ytmusic-general-background-b: var(--bg-color);
         --ytmusic-general-background-c: var(--bg-color);
         --bytm-themed-bg: var(--bg-color);
-        --carousel-items-width: carousel-items-width;
     }
 
     ytmusic-app[is-bauhaus-sidenav-enabled] #guide-wrapper.ytmusic-app {
@@ -36,6 +41,10 @@
     ytmusic-player-bar {
     background: rgb(1,1,1);
     background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(1,1,1,1) 15%, rgba(1,1,1,1) 45%, rgba(0,0,0,1) 100%);
+    }
+    
+    #sliderBar, #sliderKnob {
+        filter: hue-rotate(var(--slider-hue)) saturate(var(--slider-saturation)) brightness(var(--slider-brightness));
     }
 
     .background-gradient {
@@ -63,15 +72,15 @@
     }
 
     .ytmusic-carousel-shelf-basic-header-renderer .title {
-        font-size: 2em!important;
+        font-size: var(--title-size)!important;
     }
 
     .ytmusic-carousel-shelf-basic-header-renderer .strapline {
-        font-size: 0.9em!important;
+        font-size: var(--strapline-size)!important;
     }
 
     #player {
-        margin: 100px 150px!important;
+        margin: var(--coverart-margin-x) var(--coverart-margin-y)!important;
     }
 }
 @-moz-document domain("music.youtube.com") {
